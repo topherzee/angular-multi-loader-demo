@@ -9,52 +9,41 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading App 1...</app-root>
-  <app-root-2>Loading App2 ...</app-root-2>
 
 <h1>CHECK IT</h1>
 
-<script>
-/*
-window["components"] = [
-  { type: Comp2Component, selector: "app-comp2#c2" },
-  { type: Comp2Component, selector: "app-comp2#c2-b" }
-];
-*/
+<div
+  id="c1"
+  data-component="comp1"
+  data-comp1="true"
+  title="What the?"
+  description="Strange doings."
+  price="4"
+  >
+  Loading 1 ...
+</div>
 
-</script>
+<div
+  id="c2"
+  data-component="comp2"
+  data-comp2="true"
+  title="Fantastic Planet"
+  description="Strange doings."
+  price="4"
+  >
+  Loading 2 ...
+</div>
 
-<app-comp1
-            id="c1"
-            data-component="true"
-            title="What the?"
-            description="Strange doings."
-            price="4"
-            >
-            Loading 1 ...
-</app-comp1>
-
-<app-comp2
-            id="c2"
-            data-component="true"
-            title="Fantastic Planet"
-            description="Strange doings."
-            price="4"
-            >
-            Loading 2 ...
-</app-comp2>
-
-<app-comp2
-            id="c2-b"
-            data-component="true"
-            title="King Kong"
-            description="A big ape rampages."
-            price="3"
-            >
-            Loading 2-b ...
-</app-comp2>
-
-
+<div
+  id="c2-b"
+  data-component="comp2"
+  data-comp2="true"
+  title="King Kong"
+  description="A big ape rampages."
+  price="3"
+  >
+  Loading 2-b ...
+</div>
 
 </body>
 </html>

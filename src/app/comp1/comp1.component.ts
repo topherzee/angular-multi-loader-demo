@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef} from '@angular/core';
 
 @Component({
-  selector: 'app-comp1',
+  selector: '[data-component]="comp1"',
   templateUrl: './comp1.component.html',
   styleUrls: ['./comp1.component.css']
 })
@@ -15,6 +15,5 @@ export class Comp1Component  {
     this.title = native.getAttribute("title");
     this.price = +native.getAttribute("price");
   }
-
 
 }
