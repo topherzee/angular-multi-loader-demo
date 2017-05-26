@@ -11,9 +11,22 @@ import {
 } from '@angular/core';
 
 import { Comp2Component } from './comp2/comp2.component';
+import { Comp1Component } from './comp1/comp1.component';
+
+
+
+//import * as components from './comp2/comp2.component' './comp1/comp1.component';
 
 export class TopherLoader {
-  public componentIds: string[];
+
+
+
+  REGISTRY = {
+    "app-comp1":Comp1Component,
+    "app-comp2":Comp2Component
+}
+
+
 
   constructor(public appModule: NgModuleRef<any>) {
     //this.componentIds = Object.keys(components);
@@ -54,7 +67,8 @@ export class TopherLoader {
           // Define ngClassName based on component settings or build default
           // ngClassName based on element value.
           let elID = el.getAttribute("id");
-          console.log("el name:" + el.tagName + " id:" + elID);
+          let elTagName = el.tagName.toLowerCase();
+          console.log("el name:" + elTagName + " id:" + elID);
 
           /*
           let ngClassName = (typeof this.components[id]["ngClassName"] === 'string') ?
@@ -84,7 +98,11 @@ export class TopherLoader {
           initStatus.donePromise.then(() => {
             // Get the component factory and create it
             const compFactory = this.appModule.componentFactoryResolver
-                .resolveComponentFactory(Comp2Component);
+                //.resolveComponentFactory(eval("Comp2Component"));
+                //.resolveComponentFactory(components["Comp2Component"]);
+                //.resolveComponentFactory(Comp2Component);
+                //.resolveComponentFactory(this.REGISTRY["app-comp2"]);
+                .resolveComponentFactory(this.REGISTRY[elTagName]);
 
 
 
@@ -94,7 +112,7 @@ export class TopherLoader {
             //compRef.changeDetectorRef.detectChanges();
             //appRef.registerChangeDetector(compRef.changeDetectorRef);
 
-            compFactory["factory"].selector = "app-comp2#" + elID;//componentDef.selector;
+            compFactory["factory"].selector = elTagName + "#" + elID;//componentDef.selector;
               appRef.bootstrap(compFactory);
           });
 

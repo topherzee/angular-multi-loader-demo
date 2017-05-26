@@ -24,7 +24,7 @@ export const BOOTSTRAP_COMPONENTS_TOKEN = new OpaqueToken('bootstrap_components'
     FormsModule,
     HttpModule
   ],
-  entryComponents: [ AppComponent, Comp2Component ]
+  entryComponents: [ AppComponent, Comp1Component,  Comp2Component ]
   /*providers: [],
   bootstrap: [AppComponent, Comp1Component, Comp2Component]*/
 })
