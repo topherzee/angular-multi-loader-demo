@@ -29,11 +29,19 @@ export const BOOTSTRAP_COMPONENTS_TOKEN = new OpaqueToken('bootstrap_components'
   bootstrap: [AppComponent, Comp1Component, Comp2Component]*/
 })
 export class AppModule {
-  constructor(
+
+  /*constructor(
       private resolver : ComponentFactoryResolver,
       @Inject(BOOTSTRAP_COMPONENTS_TOKEN) private components
+  ) {}*/
+
+  constructor(
+      private resolver : ComponentFactoryResolver
   ) {}
 
+  ngDoBootstrap(): void {}
+
+/*
   ngDoBootstrap(appRef : ApplicationRef) {
     this.components.forEach((componentDef : {type: Type<any>, selector: string}) => {
       const factory = this.resolver.resolveComponentFactory(componentDef.type);
@@ -41,5 +49,6 @@ export class AppModule {
       appRef.bootstrap(factory);
     });
   }
+  */
 
 }
