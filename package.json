@@ -1,6 +1,6 @@
 {
-  "name": "simple",
-  "version": "0.0.0",
+  "name": "angular-multi-loader-demo",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -42,5 +42,9 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  }
+  },
+  "contributors": [
+    "Magnolia (https://magnolia-cms.com/)",
+    "Christopher Zimmermann @topherzee"
+  ]
 }
