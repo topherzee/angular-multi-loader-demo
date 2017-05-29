@@ -24,6 +24,20 @@ The `COMPONENT_NAME_TO_CLASS_MAPPING` must be setup to map between the String na
 
 Additionally, the component classes must be imported in `src/app/multi-loader.ts`, `src/app/app/module.ts`
 
+Example CMS component file (based on Magnolia CMS ):
+```
+<div
+  id="id-${content.@uuid}"
+  data-component="comp1"
+
+  title="${content.title!}"
+  description="${cmsfn.decode(content).desc!}"
+  price="${content.price!}"
+  >
+  Loading Comp1 ...
+</div>
+```
+
 ## Notes
 
 (This whole endeavor is complicated by the fact we want to support multiple instances of the same component on the same page. Otherwise you can just do this: http://plnkr.co/edit/aZqdJe3OZ8K2odHioWkB?p=preview See `main.ts`)
