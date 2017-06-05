@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef} from '@angular/core';
 
 @Component({
-  selector: '[data-component]="comp1"',
   templateUrl: './comp1.component.html',
   styleUrls: ['./comp1.component.css']
 })

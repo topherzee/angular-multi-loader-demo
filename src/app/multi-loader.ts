@@ -10,45 +10,47 @@ import {
     SystemJsNgModuleLoader
 } from '@angular/core';
 
-import { Comp2Component } from './comp2/comp2.component';
-import { Comp1Component } from './comp1/comp1.component';
+import {Container} from './container';
+
 
 export class MultiLoader {
 
-  /*
-  Ideally this would not be necessary.
-  But I could not find a way to instantiate the class based on the
-  data-component attribute.
-  I tried eval() - but somehow the imports were not loaded yet or something.
-  */
-  COMPONENT_NAME_TO_CLASS_MAPPING = {
-    "comp1":Comp1Component,
-    "comp2":Comp2Component
+  private DEFAULT_HABITAT_SELECTOR = 'data-component';
+
+  private componentSelector: string;
+
+  constructor(public appModule: NgModuleRef<any>,
+              public container: Container) {
+                // Set dom component selector
+
+            this.componentSelector = this.DEFAULT_HABITAT_SELECTOR;
+
   }
 
-  constructor(public appModule: NgModuleRef<any>) {
-  }
 
   public initialize(): void {
     let componentsWrapper = 'body';
     let content = document.querySelector(componentsWrapper);
 
     if (content) {
-      let componentElements: NodeListOf<Element> = document.querySelectorAll('[data-component]');
+      let componentElements: NodeListOf<Element> =
+        document.querySelectorAll(`[${this.componentSelector}]`);
+
       this.bootstrapComponents(componentElements);
     }
   }
 
-  public bootstrapComponents(els: NodeListOf<Element>): void {
-    console.log("checkElements l=" + els.length);
 
-    for (var i = 0; i < els.length; ++i) {
+  public bootstrapComponents(elements: NodeListOf<Element>): void {
+
+    for (var i = 0; i < elements.length; ++i) {
       console.log("el i:" + i);
 
-      let el: Element= els[i];
-      let elID = el.getAttribute("id");
-      let elCompName = el.getAttribute("data-component");
-      console.log("el comp:" + elCompName + " id:" + elID);
+      const el: Element= elements[i];
+      const id = el.getAttribute("id");
+      const elCompName = el.getAttribute(this.componentSelector);
+      console.log("el comp:" + elCompName + " id:" + id);
+      const component = this.container.resolve(elCompName);
 
       const appRef = this.appModule.injector.get(ApplicationRef);
       const initStatus = this.appModule.injector.get(ApplicationInitStatus);
@@ -56,11 +58,9 @@ export class MultiLoader {
       initStatus.donePromise.then(() => {
         // Get the component factory and create it
         const compFactory = this.appModule.componentFactoryResolver
-            .resolveComponentFactory(
-              this.COMPONENT_NAME_TO_CLASS_MAPPING[elCompName]
-            );
+            .resolveComponentFactory(component);
 
-        compFactory["factory"].selector = "#" + elID;
+        compFactory["factory"].selector = "#" + id;
         appRef.bootstrap(compFactory);
       });
     }
